@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="demo.ConvertTime">
+        <hbox>
+            <label id="title" value="Timestamp"/>
+            <textbox id="textbox" value="1624377253"/>
+            <button label="Convert" id = "convert"></button>
+            <label id="result" value="Result"/>
+        </hbox>
+    </window>
+</zk>
