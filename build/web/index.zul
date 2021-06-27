@@ -1,12 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?page title="CustomerList" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <style>
+    
+        .fimageedit 
+        { 
+            width: 25px; background-image:    url('./images/icon-edit.png'); 
+            background-repeat: no-repeat;
+            border: 0 none; 
+            cursor: pointer; 
+        }
+        .fimageDelete 
+        { 
+            width: 25px; background-image: url('./images/icon-trash-red.png'); 
+            background-repeat: no-repeat; 
+            border: 0 none; 
+            cursor: pointer; 
+        }
 
-<zk xmlns="http://www.zkoss.org/2005/zul">
-    <window apply="demo.ConvertTime">
-        <hbox>
-            <label id="title" value="Timestamp"/>
-            <textbox id="textbox" value="1624377253"/>
-            <button label="Convert" id = "convert"></button>
-            <label id="result" value="Result"/>
-        </hbox>
+    </style>
+    
+    <window title="Customer List" border="normal"
+            apply="org.zkoss.bind.BindComposer, CustomerListComposer"
+            viewModel="@id('myvm') @init('CustomerListVM')">
+        <div>
+            <button label="Add New Customer" id="addNewCustomerButton"/>
+        </div>
+        <separator />
+
+        <listbox id="test" model="@load(myvm.allCustomers)"
+                 selectedItem="@bind(myvm.curSelectedCustomer)">
+            <listhead sizable="true">
+                <listheader label="Last Name" width="400px"
+                            sort="auto(lastName)" />
+                <listheader label="First Name" width="400px"
+                            sort="auto(firstName)" />
+                <listheader label="email" width="400px"
+                            sort="auto(email)" />
+                <listheader label="Action" />
+            </listhead>
+            <template name="model" var="p1">
+                <listitem>
+                    <listcell label="@load(p1.lastName)" />
+                    <listcell label="@load(p1.firstName)" />
+                    <listcell label="@load(p1.email)" />
+                    <listcell>
+                        <hbox spacing="20px">
+                            <image sclass="fimageDelete"
+                                   onClick="@command('deleteThisCustomer')" />
+                            <image sclass="fimageedit"
+                                   onClick="@command('editThisCustomer')" />
+                        </hbox>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
     </window>
 </zk>
